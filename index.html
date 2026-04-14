@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabulate - Elite Guitar PWA</title>
+    <meta name="description" content="史詩吉他三聲部 - 戰鬥編排版 PWA，支援離線播放與樂譜顯示。" />
+    <meta name="theme-color" content="#0A0C14" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/abcjs-audio.css"
+    />
+  </head>
+  <body>
+    <!-- Unified App Container -->
+    <div class="app-root">
+      
+      <!-- 2. Main Center Area (Score Content) -->
+      <main class="main-scroller" id="score-container">
+        
+        <!-- Interactive Musical Title -->
+        <div class="musical-title-wrapper">
+          <div class="song-selector-container">
+            <select id="song-select">
+              <!-- JS will inject options here -->
+            </select>
+            <div class="dropdown-arrow">▼</div>
+          </div>
+        </div>
+
+        <!-- The actual Music Sheet -->
+        <div id="paper"></div>
+      </main>
+
+      <!-- 3. Bottom Performance Console -->
+      <aside id="floating-player" class="bottom-console-wrapper">
+        <div class="glass-panel performance-console">
+          
+          <div class="console-main-content">
+            <!-- Playback Controls -->
+            <div class="playback-controls">
+              <button class="btn-icon shuffle-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg></button>
+              <button id="btn-restart" class="btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+              <button id="btn-play-pause" class="btn-hero-play">
+                 <svg id="play-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                 <svg id="pause-icon" class="hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              </button>
+              <button class="btn-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+              <button class="btn-icon loop-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
+            </div>
+
+            <!-- Progress Insight -->
+            <div class="monitor-layer">
+               <span id="current-time">00:00</span>
+               <div class="track-gauge" id="progress-container">
+                 <div id="progress-bar" class="gauge-fill">
+                   <div class="gauge-head"></div>
+                 </div>
+               </div>
+               <span id="total-time">00:00</span>
+            </div>
+          </div>
+
+          <!-- Vertical Speed Stacked Gutter -->
+          <div class="speed-gutter">
+             <div id="meta-bpm" class="bpm-indicator">160 BPM</div>
+             <button id="btn-speed-up" class="btn-speed">+</button>
+             <button id="btn-speed-down" class="btn-speed">-</button>
+          </div>
+          
+        </div>
+
+        <!-- Hidden Audio Engine & Logic Bridges -->
+        <div id="audio-player" class="hidden"></div>
+        <div class="logic-gate hidden">
+            <p id="player-status"></p>
+            <div id="display-title"></div>
+            <div id="display-artist"></div>
+            <button id="player-init-btn"></button>
+            <p id="status-text"></p>
+            <h3 id="player-song-title"></h3>
+            <p id="player-song-artist"></p>
+            <span id="meta-key"></span>
+        </div>
+      </aside>
+
+    </div><!-- End app-root -->
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

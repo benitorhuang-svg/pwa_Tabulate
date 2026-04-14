@@ -1,0 +1,323 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&family=JetBrains+Mono:wght@700&display=swap");
+
+/* --- Premium Theme Configuration --- */
+:root {
+  --primary: #EADBB1; /* Champagne Gold */
+  --primary-glow: rgba(234, 219, 177, 0.4);
+  --speed-color: #00D2FF; 
+  --bg-deep: #05070A;
+  --bg-panel: rgba(18, 18, 18, 0.85);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --font-sans: "Outfit", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  color-scheme: dark;
+}
+
+/* --- Core Shell --- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-deep);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 1. Top Identity Bar --- */
+.top-identity-bar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 850px;
+  height: 48px;
+  display: none;
+}
+
+.meta-side-box {
+  width: 100px;
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.text-right { text-align: right; }
+
+/* --- 2. Center Content (Score) --- */
+.main-scroller {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 2rem; /* Give some breathing room at the top */
+  padding-bottom: 120px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.musical-title-wrapper {
+  padding: 1.5rem 1rem; 
+  display: flex;
+  justify-content: center; 
+  width: 90%; 
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.song-selector-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  z-index: 2000; /* Ensure it stays above other elements */
+}
+
+#song-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #FFFFFF;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 0.6rem 3rem 0.6rem 1.5rem;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  min-width: 320px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#song-select option {
+  background-color: #1a1c24; 
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+}
+
+#song-select:hover, #song-select:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--primary);
+  box-shadow: 0 0 25px var(--primary-glow);
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: 1.2rem;
+  color: var(--primary);
+  font-size: 0.8rem;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+#paper {
+  position: relative;
+  top: -35px; /* Slightly adjusted for larger symbols */
+  width: 90% !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 !important; 
+  min-height: 500px;
+  background: transparent;
+}
+
+#paper svg {
+  display: block;
+  margin: 0 auto;
+  width: 100% !important; /* Force stretch to container width */
+  max-width: 100%;
+  height: auto !important;
+  filter: drop-shadow(0 0 15px rgba(0,0,0,0.5));
+}
+
+/* --- 3. Bottom Performance Console --- */
+.bottom-console-wrapper {
+  position: fixed;
+  bottom: 0; /* Snap to bottom */
+  left: 0;
+  width: 100%;
+  max-width: none;
+  z-index: 1000;
+}
+
+.performance-console {
+  display: flex;
+  background: rgba(18, 18, 18, 0.95); /* More solid for bottom dock */
+  backdrop-filter: blur(40px);
+  border-top: var(--glass-border);
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+.console-main-content {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.playback-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--primary);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.btn-icon:hover { opacity: 1; transform: scale(1.1); }
+.btn-icon svg { width: 22px; height: 22px; }
+
+.btn-hero-play {
+  width: 60px;
+  height: 60px;
+  background: var(--primary);
+  border: none;
+  border-radius: 50%;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px var(--primary-glow);
+  transition: all 0.3s ease;
+}
+
+.btn-hero-play:hover { transform: scale(1.05); }
+.btn-hero-play svg { width: 32px; height: 32px; }
+
+.monitor-layer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.track-gauge {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+.gauge-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  border-radius: 2px;
+  position: relative;
+}
+
+.gauge-head {
+  position: absolute;
+  right: -6px;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  background: #FFF;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* --- Speed Side Gutter --- */
+.speed-gutter {
+  width: 80px;
+  border-left: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.bpm-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--primary);
+  opacity: 0.8;
+}
+
+.btn-speed {
+  background: rgba(0, 210, 255, 0.15);
+  border: none;
+  color: var(--speed-color);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* --- ABCJS Scoring Styles --- */
+.abcjs-staff, .abcjs-bar { stroke: var(--primary) !important; opacity: 0.6; }
+.abcjs-clef, .abcjs-key-signature, .abcjs-time-signature { fill: var(--primary) !important; }
+.abcjs-note, .abcjs-rest, .abcjs-beam, .abcjs-slur { fill: #FFFFF0 !important; stroke: #FFFFF0 !important; }
+.abcjs-notehead { fill: #FFFFF0 !important; }
+.abcjs-tempo { display: none !important; }
+.abcjs-tab-note { fill: var(--primary) !important; font-family: var(--font-mono) !important; font-weight: 800 !important; }
+.abcjs-highlight { fill: var(--speed-color) !important; stroke: var(--speed-color) !important; filter: drop-shadow(0 0 8px var(--speed-color)); }
+.abcjs-title, .abcjs-composer, .abcjs-voice-name { display: none !important; }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  #song-select {
+    font-size: 1.3rem;
+    min-width: 280px;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+  }
+  
+  .musical-title-wrapper {
+    padding: 1rem 0.5rem;
+  }
+
+  .dropdown-arrow {
+    right: 0.8rem;
+    font-size: 0.6rem;
+  }
+}
+
+/* Utilities */
+.hidden { display: none !important; }
